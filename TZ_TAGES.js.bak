@@ -42,7 +42,7 @@ async function sortLargeFile(filename) {
 
   // Обработка последнего фрагмента, если он есть
   if (currentChunk.length > 0) {
-    const chunkFile = `${tempFolder}/chunk_${chunkFiles.length}.txt`;
+    const chunkFile = `${tempFolder}/chunk_${chunkFiles.length-1}.txt`;
     await writeFileAsync(chunkFile, currentChunk.join('\n'));
     chunkFiles.push(chunkFile);
   }
@@ -52,7 +52,7 @@ async function sortLargeFile(filename) {
   for (const chunkFile of chunkFiles) {
     const lines = await readFileAsync(chunkFile, 'utf8');
     const sortedLines = lines.split('\n').sort();
-    const sortedChunkFile = `${tempFolder}/sorted_${chunkFile}`;
+    const sortedChunkFile = `${tempFolder}/sorted_${chunkFile.split('/').pop()}`;
     await writeFileAsync(sortedChunkFile, sortedLines.join('\n'));
     sortedChunkFiles.push(sortedChunkFile);
   }

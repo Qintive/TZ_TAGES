@@ -28,7 +28,7 @@ async function sortLargeFile(filename) {
 
   for await (const line of rl) {
     currentChunk.push(line);
-    currentChunkSize += line.length + 1; // +1 for newline character
+    currentChunkSize += line.length + 1;
 
     if (currentChunkSize >= CHUNK_SIZE) {
       const chunkFile = `${tempFolder}/chunk_${chunkFiles.length}.txt`;
